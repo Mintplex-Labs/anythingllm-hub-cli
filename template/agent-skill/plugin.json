@@ -1,0 +1,19 @@
+{
+  "name": "My Agent Skill",
+  "version": "1.0.0",
+  "description": "The template agent skill",
+  "author": null,
+  "license": "MIT",
+  "active": false,
+  "hubId": "my-agent-skill",
+  "examples": [
+    {
+      "prompt": "Do something",
+      "call": "{}"
+    }
+  ],
+  "entrypoint": {
+    "file": "handler.js",
+    "params": {}
+  }
+}

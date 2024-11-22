@@ -1,0 +1,46 @@
+{
+  "name": "@mintplexlabs/anythingllm-hub-cli",
+  "version": "0.0.1",
+  "description": "CLI tool for interacting with the AnythingLLM Hub for custom agent skills and data connectors",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "engineStrict": true,
+  "main": "bin.js",
+  "bin": {
+    "anythingllm-hub-cli": "./bin.js"
+  },
+  "files": [
+    "bin.js",
+    "AnythingLLMStore.js",
+    "CommunityHubInterface.js",
+    "utils/*.js"
+  ],
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "keywords": [
+    "cli",
+    "anythingllm",
+    "hub",
+    "agent",
+    "skills"
+  ],
+  "author": "Mintplex Labs",
+  "license": "MIT",
+  "dependencies": {
+    "acorn": "^8.14.0",
+    "archiver": "^7.0.1",
+    "input": "^1.0.1",
+    "node-fetch": "2",
+    "yargs": "^17.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mintplexlabs/anythingllm-hub-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mintplexlabs/anythingllm-hub-cli/issues"
+  },
+  "homepage": "https://github.com/mintplexlabs/anythingllm-hub-cli#readme"
+}
