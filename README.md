@@ -39,6 +39,11 @@ Link the local package so you can test it out without publishing:
 npm link
 ```
 
-Test it out by running `anythingllm-hub-cli` in your terminal.
+Test it out by running `npx anythingllm-hub-cli` in your terminal.
 
-`npm unlink` to remove the link when you're done.
+```bash
+npm unlink -g anythingllm-hub-cli
+npm uninstall -g anythingllm-hub-cli
+npx clear-npx-cache
+npx @mintplex-labs/anythingllm-hub-cli@latest
+``` to remove the link when you're done.

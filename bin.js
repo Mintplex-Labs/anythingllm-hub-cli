@@ -1,10 +1,4 @@
 #!/usr/bin/env node
-
-
-console.log('Node version:', process.version);
-console.log('Node path:', process.execPath);
-
-
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
