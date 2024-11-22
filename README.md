@@ -27,11 +27,10 @@ Plugins are extensions to AnythingLLM that can be used to add custom functionali
 - `npx anythingllm-hub-cli login` - Login using your [AnythingLLM Hub Connection Key](https://hub.anythingllm.com/me)
 - `npx anythingllm-hub-cli logout` - Logout and clear your connection key from the config file
 - `npx anythingllm-hub-cli upload --type=<agent-skill> --path=<path-to-plugin-folder>` - Upload an agent skill to the AnythingLLM Hub
+- `npx anythingllm-hub-cli init --type=<agent-skill> --output=<path-to-save-to>` - Create a new agent skill in the current directory or at the specified folder
 
 Available entity types:
 - `agent-skill` - An agent skill is a plugin that can be used to add custom functionality to AnythingLLM.
-
-
 
 
 ## Development
