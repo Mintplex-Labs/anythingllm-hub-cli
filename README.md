@@ -42,8 +42,14 @@ npm link
 Test it out by running `npx anythingllm-hub-cli` in your terminal.
 
 ```bash
+# Remove the link so you can test the latest version
 npm unlink -g anythingllm-hub-cli
 npm uninstall -g anythingllm-hub-cli
 npx clear-npx-cache
 npx @mintplex-labs/anythingllm-hub-cli@latest
-``` to remove the link when you're done.
+```
+
+Publish the package:
+```bash
+npm publish --access public
+```
