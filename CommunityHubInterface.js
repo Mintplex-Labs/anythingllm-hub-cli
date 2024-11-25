@@ -81,8 +81,11 @@ class CommunityHubInterface {
    * @param {string} filePath - The path to the file to upload.
    * @returns {Promise<void>}
    */
-  async uploadFile({ signedUrl }, zipBundlePath) {
-    const response = await fetch(signedUrl, {
+  async uploadFile({ signedUrl, uri, debug = false }, zipBundlePath) {
+    const uploadUrl = new URL(signedUrl);
+    if (debug) uploadUrl.searchParams.set('uri', uri);
+
+    const response = await fetch(uploadUrl, {
       method: 'PUT',
       body: fs.readFileSync(zipBundlePath),
       headers: {

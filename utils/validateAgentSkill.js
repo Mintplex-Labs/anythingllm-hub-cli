@@ -4,6 +4,7 @@ const acorn = require('acorn');
 const input = require('input');
 const archiver = require('archiver');
 const ALLOWED_EXTENSIONS = ['js', 'json', 'txt', 'md'];
+const IGNORED_FILES = ['package-lock.json', 'yarn.lock', 'package.json'];
 const PLUGIN_JSON_FIELDS = {
   'hubId': {
     default: null,
@@ -151,15 +152,21 @@ Contains ${validFiles.length} files.
   try {
     fs.mkdirSync(tempDir);
     for (const file of validFiles) {
-      console.log(`>>> Copying ${file.name}...`);
-      fs.writeFileSync(path.join(tempDir, file.name), file.content, { encoding: 'utf8' });
+      if (file.name === 'node_modules') {
+        console.log(`>>> Copying ${file.name}...`);
+        fs.cpSync(path.join(agentSkillFolder, file.name), path.join(tempDir, file.name), { recursive: true });
+      } else {
+        console.log(`>>> Copying ${file.name}...`);
+        fs.writeFileSync(path.join(tempDir, file.name), file.content, { encoding: 'utf8' });
+      }
     }
 
     outputPath = path.join(process.cwd(), `${uploadResponse.entityId}.zip`);
     console.log('Creating archive...');
     await createArchive(tempDir, outputPath);
+
     console.log('Uploading archive...');
-    const ok = await store.uploadFile(uploadResponse, outputPath);
+    const ok = await store.uploadFile({ signedUrl: uploadResponse.signedUrl, uri: uploadResponse.uri, debug: store.debug }, outputPath);
     if (!ok) throw new Error('Failed to upload archive');
 
     console.log('Finalizing the upload...');
@@ -234,7 +241,22 @@ async function validateFiles(store, agentSkillFolder) {
   }
 
   fs.readdirSync(agentSkillFolder).forEach(file => {
-    if (requiredFiles.includes(file) || fs.lstatSync(path.join(agentSkillFolder, file)).isDirectory()) return;
+    if (
+      requiredFiles.includes(file) ||
+      IGNORED_FILES.includes(file) ||
+      (fs.lstatSync(path.join(agentSkillFolder, file)).isDirectory() && file !== 'node_modules')
+    ) return;
+
+    if (fs.lstatSync(path.join(agentSkillFolder, file)).isDirectory() && file === 'node_modules') {
+      console.log(`✅ Found node_modules directory - it will be bundled with the skill`);
+      validFiles.push({
+        name: 'node_modules',
+        content: "# Node modules imported by this skill:\n" + fs.readdirSync(path.join(agentSkillFolder, file)).map(file => file).join('\n'),
+        path: path.join(agentSkillFolder, file).replace(process.cwd(), parentFolder),
+        size: fs.statSync(path.join(agentSkillFolder, file)).size,
+      });
+      return;
+    }
 
     const extension = path.extname(file).slice(1);
     if (!ALLOWED_EXTENSIONS.includes(extension)) {
