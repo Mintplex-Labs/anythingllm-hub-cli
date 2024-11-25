@@ -2,6 +2,7 @@
 
 /**
  * @typedef {Object} AnythingLLM
+ * @property {{[key: string]: any}} runtimeArgs - Contains runtime arguments passed to the agent skill @link {https://docs.anythingllm.com/agent/custom/handler-js#available-runtime-properties-and-methods}
  * @property {('docker'|'desktop')} runtime - The runtime environment.
  * @property {import('./plugin.json')} config - your plugin's config
  * @property {function(string|Error): void} logger - Logging function

@@ -83,6 +83,20 @@ const PLUGIN_JSON_FIELDS = {
       return examples;
     }
   },
+  'setup_args': {
+    default: {},
+    validate: function ({ setup_args = {} }) {
+      if (!setup_args || Object.keys(setup_args).length === 0) return this.default;
+      const validatedArgs = {};
+      // Strip the value from the setup_args object
+      // so the user does not accidentally publish their API keys etc
+      for (const [key, data] of Object.entries(setup_args)) {
+        const { value, ...config } = data;
+        validatedArgs[key] = { ...config };
+      }
+      return validatedArgs;
+    }
+  },
   'entrypoint': {
     default: {
       file: 'handler.js',
