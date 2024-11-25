@@ -1,6 +1,6 @@
 {
   "name": "@mintplex-labs/anythingllm-hub-cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI tool for interacting with the AnythingLLM Hub for custom agent skills and data connectors",
   "engines": {
     "node": ">=16.0.0"

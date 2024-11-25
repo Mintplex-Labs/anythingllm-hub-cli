@@ -225,7 +225,8 @@ async function validateFiles(store, agentSkillFolder) {
         });
         console.log(`✅ ${file} is valid.`);
       } catch (error) {
-        throw new Error(`Error parsing ${file}: ${error.message}`);
+        console.error(error);
+        throw new Error(`Error parsing ${file}.`);
       }
     }
 
