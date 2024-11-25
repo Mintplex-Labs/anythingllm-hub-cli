@@ -124,7 +124,6 @@ class AnythingLLMStore extends CommunityHubInterface {
   async newItem({ type, output }) {
     if (!this.supportedUploadTypes.includes(type)) throw new Error(`Unsupported upload type: ${type}`);
     if (!output) throw new Error('--output argument is required');
-    if (!fs.existsSync(output)) throw new Error(`--output argument was provided but the path does not exist`);
 
     const outputFolder = output === '.' ? `my-${type}-${Date.now().toString().slice(-3)}` : output;
     const outputFolderPath = path.resolve(outputFolder);

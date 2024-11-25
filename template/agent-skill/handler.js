@@ -5,6 +5,7 @@
  * @property {import('./plugin.json')} config - your plugin's config
  * @property {function(string|Error): void} logger - Logging function
  * @property {function(string): void} introspect - Print a string to the UI while agent skill is running
+ * @property {{getLinkContent: function(url): Promise<{success: boolean, content: string}>}} webScraper - Scrape a website easily to bypass user-agent restrictions.
  */
 
 /** @type {AnythingLLM} */
